@@ -1,14 +1,14 @@
 var container = document.getElementById("container"); //Bý til container þar sem ég set allt
 var ourRequest = new XMLHttpRequest(); //bý til XLMHttpRequest
 ourRequest.open('GET', 'http://apis.is/concerts');//Sæki upplýsingarnar af apis.is
-ourRequest.onload = function(){ 
-    var myData = JSON.parse(ourRequest.responseText);    
+ourRequest.onload = function () {
+    var myData = JSON.parse(ourRequest.responseText);
     renderHTML(myData); // senda upplýsingarnar til renderHTML function
     onAfterRenderHTML(myData);
-}
+};
 ourRequest.send();
 
-function renderHTML(data) {  
+function renderHTML(data) {
     var htmlString = ""; // bý til breytu htmlstring
     moment.locale("is"); //Breyti tímasetningu í íslenskan tíma    
     
@@ -39,10 +39,8 @@ function renderHTML(data) {
     for (i = 0; i < data.results.length; i++) {        
         htmlString +=  "<div><img src=\"" + data.results[i].imageSource + "\" alt=\"poster\"/><p>" + data.results[i].eventDateName +" | "+ data.results[i].name + " | "+ moment(data.results[i].dateOfShow).format("LLLL") + " | " + data.results[i].eventHallName + "</p></div>";
     }
-    htmlString += "</div>" // enda theList div
-    
-    container.insertAdjacentHTML('beforeend', htmlString); // set í container
-    
+    htmlString += "</div>" // enda theList div    
+    container.insertAdjacentHTML('beforeend', htmlString); // set í container    
 };
 
 function onAfterRenderHTML(data) {
@@ -61,7 +59,7 @@ function onAfterRenderHTML(data) {
              }
         }
         htmlString += "</div>"
-        $("div.theList").replaceWith(htmlString);
+        $("div.theList").replaceWith(htmlString); //Replace-a það sem á við með jquery replaceWith
     });
     
     $( "#searchSubmit" ).click(function() { // þegar ég ýti á takkann
@@ -77,7 +75,7 @@ function onAfterRenderHTML(data) {
             }
         }
         htmlString += "</div>"
-        $("div.theList").replaceWith(htmlString);
+        $("div.theList").replaceWith(htmlString); //Replace-a það sem á við með jquery replaceWith
     });
 }
 
